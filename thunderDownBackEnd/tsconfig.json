@@ -6,6 +6,8 @@
     "outDir": "./build",
     "strict": true,
     "types": ["node"],
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "include": ["src"]
 }
