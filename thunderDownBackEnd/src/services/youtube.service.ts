@@ -2,7 +2,6 @@ import axios from "axios";
 import ytDlp from "youtube-dl-exec";
 import { YouTubeSearchResponse } from "../types/returnApi";
 import { DownloadInfo, Format } from "../types/youtube";
-import { API_KEY } from "../utils/url-api-yutube";
 
 export const SearchMedia = async (
   query: string,
@@ -15,7 +14,7 @@ export const SearchMedia = async (
         params: {
           part: "snippet",
           q: query,
-          key: API_KEY,
+          key: process.env.API_KEY,
           maxResults: 100,
           type: "video",
         },
@@ -32,7 +31,7 @@ export const SearchMedia = async (
         params: {
           part: "snippet,contentDetails,statistics",
           id: videoIds.join(","),
-          key: API_KEY,
+          key: process.env.API_KEY,
         },
       }
     );
@@ -58,7 +57,7 @@ export const FindMediaByID = async (id: string) => {
         params: {
           part: "snippet,contentDetails,statistics",
           id: id,
-          key: API_KEY
+          key: process.env.API_KEY,
         }
       }
     );
@@ -86,7 +85,7 @@ export const getTrendingVideos = async () => {
           part: "snippet,contentDetails,statistics",
           chart: "mostPopular",
           maxResults: 16,
-          key: API_KEY,
+          key: process.env.API_KEY,
         },
       }
     );
