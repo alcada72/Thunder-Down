@@ -6,8 +6,8 @@
     "outDir": "./build",
     "strict": true,
     "types": ["node"],
-    "moduleResolution": "bundler",
-    "ignoreDeprecations": "6.0"
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
-  "include": ["src", "src/services/.service.ts"]
+  "include": ["src"]
 }

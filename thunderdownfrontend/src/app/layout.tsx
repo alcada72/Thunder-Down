@@ -5,9 +5,10 @@ export const metadata = {
   description: "Plataforma rápida para baixar vídeos e músicas.",
   
   openGraph: {
-    title: "ThunderDown",
+    title: "Thunder Down",
     description: "Baixe vídeos e músicas facilmente.",
-    url: "https://thunderdown.com",
+    url: "https://thunder-down-xwff.vercel.app/",
+    siteUrl: "https://thunder-down-xwff.vercel.app/",
     siteName: "Thunder Down",
     images: [
       {
@@ -22,7 +23,7 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "ThunderDown",
+    title: "Thunder Down",
     description: "Download rápido e seguro",
     images: ["/icon.png"],
   },

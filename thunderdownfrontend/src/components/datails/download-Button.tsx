@@ -5,6 +5,7 @@ import { downInfo } from "@/types/download";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import LightningLoader from "../UI/loader";
 
 type Props = {
   url: string; // agora passamos todos os formatos do vídeo
@@ -13,6 +14,8 @@ type Props = {
 export function DownloadButton({ url }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [infoDown, setInfoDown] = useState<downInfo>();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const formatFileSize = (size: number) => {
     if (!size) return "N/A";
@@ -30,6 +33,9 @@ export function DownloadButton({ url }: Props) {
   };
 
   async function fetchDownInfo() {
+    setLoading(true);
+    setError(null);
+
     try {
       const res = await api.post("/api/media/download/info", {
         url,
@@ -38,6 +44,9 @@ export function DownloadButton({ url }: Props) {
       setInfoDown(res.data);
     } catch (error) {
       console.error(error);
+      setError("Erro ao obter informações de download");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -47,7 +56,10 @@ export function DownloadButton({ url }: Props) {
 
   return (
     <>
-      <div className="flex-1 select-none cursor-pointer h-14 bg-red-500 flex justify-center items-center rounded-2xl">
+      {/* Botão de download */}
+      <div className="flex-1 select-none  flex-col cursor-pointer h-14 bg-red-500 flex justify-center items-center rounded-2xl">
+        {error && <span className="text-white">{error} </span>}
+
         <button
           onClick={() => setModalOpen(true)}
           title="Fazer download"
@@ -60,7 +72,7 @@ export function DownloadButton({ url }: Props) {
       </div>
 
       {/* Modal */}
-      {modalOpen && (
+      {!loading && modalOpen && (
         <div className="fixed inset-0 bg-black/50 bg-opacity-70 flex justify-center items-center z-50">
           <div className="bg-gray-900 text-white rounded-lg max-w-md w-full p-6 space-y-4">
             <h2 className="text-xl font-bold">Escolha o formato para baixar</h2>
@@ -113,6 +125,20 @@ export function DownloadButton({ url }: Props) {
             >
               Fechar
             </button>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div className="fixed inset-0 bg-black/80 bg-opacity-70 flex justify-center items-center z-50">
+          <div
+            className="text-white flex flex-col items-center 
+          rounded-lg max-w-md w-full p-6 space-y-4  gap-7"
+          >
+            <h2 className="text-xl font-bold select-none animate-pulse">
+              Carregando informações de downLoad
+            </h2>
+            <LightningLoader />
           </div>
         </div>
       )}
