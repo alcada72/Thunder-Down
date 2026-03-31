@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@import "tailwindcss";
+
+:root {
+  --background: #171717;
+  --foreground: #ffffff;
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  max-width: 100dvw;
+  scroll-behavior: smooth;
+  
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    all 0.3s ease;
+}

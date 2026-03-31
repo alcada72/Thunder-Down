@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------------------------------------
+## Inicialização do Projecto
+
+npm init  -y
+npm i -D  typescript  tsx
+npx tsc --init
+
+------------------------------------------------------------------------------------------------------------
+## Instalação de dependencias
+
+npm i express cors  helmet  zod axios bcrypt-ts multer jsonwebtoken nodemailer tsup date-fns
+npm i -D @types/node @types/express @types/cors @types/multer @types/jsonwebtoken @types/nodemailer
+
+------------------------------------------------------------------------------------------------------------
+## Inicialização do banco de dados no Projecto
+
+npm i -D prisma 
+npx prisma init
+
+------------------------------------------------------------------------------------------------------------
+## Geração do banco de dados
+npm install @prisma/client
+npx prisma generate      
+npx prisma migrate dev
+npx prisma studio    
+
+------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,27 @@
+const express = require("express");
+const ytDlp = require("yt-dlp-exec");
+
+const app = express();
+app.use(express.json());
+
+app.post("/download", async (req, res) => {
+  const { url } = req.body;
+
+  try {
+    const output = `video-${Date.now()}.mp4`;
+
+    await ytDlp(url, {
+      output: output,
+      format: "best"
+    });
+
+    res.json({ message: "Download concluído", file: output });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro ao baixar vídeo" });
+  }
+});
+
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000");
+});
